@@ -1,0 +1,76 @@
+﻿@page "/"
+
+<h3>Hello, @GetUserName() ... click the button to change it from a method call</h3>
+
+<button @onclick="ChangeName">Change Name</button>
+
+<br />
+<br />
+
+<h3>Hello, @GetUserName()! Click the button to change the name from an explicit variable initialization</h3>
+
+<button @onclick="@(() => {userName = "Kristia";})">Change Name</button>
+
+<br />
+<br />
+
+<h3>Logic test from backend:</h3>
+
+@if (testNum == 1) // this practices if statement
+{
+    <p>Num is 1</p>
+} 
+else
+{
+    <p>Num is not 1</p>
+}
+
+@*@for (int i=0; i<10; i++)
+{
+    <p>Value of i is @i</p> // this counts to nine
+}*@
+
+@foreach (var name in names)
+{
+    <p>@name</p>
+}
+
+@code {
+    private string userName = "John";
+    private int testNum = 1; // the logic above will say "Num is 1".
+    private List<string> names;
+
+    //shows how OnInitialized event works:
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        names = new List<string>
+        {
+            "Value 01",
+            "Value 02",
+            "Value 03",
+            "Value 04",
+            "Value 05",
+            "Value 06",
+            "Value 07",
+            "Value 08",
+            "Value 09"
+        };
+    }
+
+    private string GetUserName()
+    {
+        return userName;
+    }
+
+    private void ChangeName()
+    {
+        userName = "Peter";
+    }
+
+    private int GetSum()
+    {
+        return 2 + 2;
+    }
+}
